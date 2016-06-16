@@ -1,3 +1,8 @@
-import component from './components/component1';
+import data from './components/items';
+import item from './components/item';
 
-console.log(component);
+data.items()
+ .then(items => items.map(itm => item.draw(itm)))
+ .then(out => document.getElementById('main').innerHTML = out);
+
+// const baseImageUrl = 'http://psgfe.azurewebsites.net/assets/images/categories. . _medium.xxx';

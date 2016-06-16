@@ -1,3 +1,17 @@
 h1 {
     color: blue;
 }
+body {
+    font-family: consolas;
+}
+table, table td, table th{
+    text-align: center;
+}
+th {
+    color: lightslategray;
+}
+table, th, td {
+    border: solid lightslategray 1px;
+    border-collapse: collapse;
+    padding: 2px;
+}

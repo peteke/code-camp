@@ -13,4 +13,3 @@ window.onhashchange = function(ev){
    	const [url, func, arg] = location.hash.match("^#[\/](.+)[\/](.+)$");
     routes[func](arg);
 };
-// const baseImageUrl = 'http://psgfe.azurewebsites.net/assets/images/categories. . _medium.xxx';

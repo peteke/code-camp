@@ -1,7 +1,7 @@
 export default {
     draw: function(itm) {
         return `<li>
-            ${itm.name}
+            <a href="#/details/${itm.id}">${itm.name}</a>
         </li>`;
     }
 };

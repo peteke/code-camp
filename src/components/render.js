@@ -1,10 +1,12 @@
 import listitem from './listitem';
 import {getState} from './state';
 import {setState} from './state';
+import detailitem from './detailitem';
 
 export default {  
     render: function(){
         const stateInstance = getState();
+        console.log(stateInstance);
         let output = '';
         if (stateInstance.viewmode === 'list'){
             output = list(stateInstance);
@@ -34,7 +36,7 @@ function paging(stateInstance){
 }
 
 function details(stateInstance){
-
+    return detailitem.draw(stateInstance.data.filter(itms => itms.id === stateInstance.currentid)[0]);
 }
 
 function drawBody(html){

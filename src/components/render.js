@@ -1,23 +1,56 @@
-import item from './item';
+import listitem from './listitem';
 import {getState} from './state';
+import {setState} from './state';
 
-export default {
-    
-    render: function(items){
+export default {  
+    render: function(){
         const stateInstance = getState();
+        let output = '';
         if (stateInstance.viewmode === 'list'){
-            return list(items);
+            output = list(stateInstance);
+            output += paging(stateInstance);
         }
+        else if (stateInstance.viewmode === 'details'){
+            output = details(stateInstance);
+        }
+        drawBody(output);
     }
 };
 
-function list(items){
-    const stateInstance = getState();
+function list(stateInstance){
     return `<ul>
-        ${items.map((itm, index) => { 
+        ${stateInstance.data.map((itm, index) => { 
             if (index >= stateInstance.pagesize*(stateInstance.currentpage-1) && index < stateInstance.pagesize*stateInstance.currentpage){
-                return item.draw(itm);
+                return listitem.draw(itm);
             }
         }).join('')}
     </ul>`;
+}
+
+function paging(stateInstance){
+    let previous = (stateInstance.currentpage > 1) ? `<a href="#/page/${stateInstance.currentpage - 1}">prev</a>` : '';
+    let next = (stateInstance.currentpage < parseInt(stateInstance.data.length / stateInstance.pagesize) + 1) ? `<a href="#/page/${stateInstance.currentpage + 1}">next</a>`: '';
+    return previous + (previous !== '' && next !== '' ? '&nbsp;|&nbsp;' : '') + next;
+}
+
+function details(stateInstance){
+
+}
+
+function drawBody(html){
+    document.getElementById('main').innerHTML = html;
+}
+
+function previous(){
+    const stateInstance = getState();
+    if (stateInstance.currentpage <= 1)
+        return;
+    setState({ currentpage: --stateInstance.currentpage });
+}
+
+function next(){
+    const stateInstance = getState();
+    if (stateInstance.currentpage >= stateInstance.data.length / stateInstance.pagesize)
+        return;
+    setState({ currentpage: ++stateInstance.currentpage });
 }

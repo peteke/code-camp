@@ -1,6 +1,4 @@
-import listitem from './listitem';
 import {getState} from './state';
-import {setState} from './state';
 import detailitem from './detailitem';
 import list from './list';
 
